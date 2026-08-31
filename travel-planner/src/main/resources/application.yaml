@@ -1,3 +1,31 @@
 spring:
   application:
     name: travel-planner
+
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5433/travel_planner
+    username: travel_user
+    password: travel_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.zaxxer.hikari: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.springframework.boot.actuate.jdbc: DEBUG

@@ -1,0 +1,129 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.travelplanner:travel-planner >------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.3:run (default-cli) > test-compile @ travel-planner >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ travel-planner ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ travel-planner ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ travel-planner ---
+[INFO] skip non existing resourceDirectory D:\Self_Project\Travel_Planner\Travel-Planner\travel-planner\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ travel-planner ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.3.3:run (default-cli) < test-compile @ travel-planner <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.3:run (default-cli) @ travel-planner ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.3)
+
+2026-08-31T14:56:54.605+07:00  INFO 8112 --- [travel-planner] [           main] c.t.TravelPlannerApplication             : Starting TravelPlannerApplication using Java 25.0.1 with PID 8112 (D:\Self_Project\Travel_Planner\Travel-Planner\travel-planner\target\classes started by Admin in D:\Self_Project\Travel_Planner\Travel-Planner\travel-planner)
+2026-08-31T14:56:54.607+07:00  INFO 8112 --- [travel-planner] [           main] c.t.TravelPlannerApplication             : No active profile set, falling back to 1 default profile: "default"
+2026-08-31T14:56:55.349+07:00  INFO 8112 --- [travel-planner] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-31T14:56:55.372+07:00  INFO 8112 --- [travel-planner] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 JPA repository interfaces.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/C:/Users/Admin/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.28/tomcat-embed-core-10.1.28.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2026-08-31T14:56:55.953+07:00  INFO 8112 --- [travel-planner] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-08-31T14:56:55.966+07:00  INFO 8112 --- [travel-planner] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-08-31T14:56:55.966+07:00  INFO 8112 --- [travel-planner] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-08-31T14:56:56.030+07:00  INFO 8112 --- [travel-planner] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-08-31T14:56:56.031+07:00  INFO 8112 --- [travel-planner] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1379 ms
+2026-08-31T14:56:56.193+07:00 DEBUG 8112 --- [travel-planner] [           main] com.zaxxer.hikari.HikariConfig           : Driver class org.postgresql.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@105be200
+2026-08-31T14:56:56.289+07:00  INFO 8112 --- [travel-planner] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-31T14:56:56.337+07:00  INFO 8112 --- [travel-planner] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-08-31T14:56:56.362+07:00  INFO 8112 --- [travel-planner] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-08-31T14:56:56.596+07:00  INFO 8112 --- [travel-planner] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-31T14:56:56.608+07:00  WARN 8112 --- [travel-planner] [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [hibernate.temp.use_jdbc_metadata_defaults], use [hibernate.boot.allow_jdbc_metadata_access] instead
+2026-08-31T14:56:56.621+07:00  WARN 8112 --- [travel-planner] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-31T14:56:56.871+07:00  INFO 8112 --- [travel-planner] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-31T14:56:56.875+07:00  INFO 8112 --- [travel-planner] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-31T14:56:56.947+07:00  WARN 8112 --- [travel-planner] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-31T14:56:57.749+07:00  INFO 8112 --- [travel-planner] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-08-31T14:56:57.848+07:00  INFO 8112 --- [travel-planner] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-08-31T14:56:57.864+07:00  INFO 8112 --- [travel-planner] [           main] c.t.TravelPlannerApplication             : Started TravelPlannerApplication in 3.618 seconds (process running for 3.929)
+2026-08-31T14:57:00.720+07:00  INFO 8112 --- [travel-planner] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-31T14:57:00.720+07:00  INFO 8112 --- [travel-planner] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-08-31T14:57:00.721+07:00  INFO 8112 --- [travel-planner] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-08-31T14:57:00.795+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+2026-08-31T14:57:00.796+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2026-08-31T14:57:00.799+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension.............false
+2026-08-31T14:57:00.799+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : autoCommit......................true
+2026-08-31T14:57:00.799+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : catalog.........................none
+2026-08-31T14:57:00.799+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : connectionInitSql...............none
+2026-08-31T14:57:00.800+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : connectionTestQuery.............none
+2026-08-31T14:57:00.801+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : connectionTimeout...............30000
+2026-08-31T14:57:00.801+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : dataSource......................none
+2026-08-31T14:57:00.801+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : dataSourceClassName.............none
+2026-08-31T14:57:00.801+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI..................none
+2026-08-31T14:57:00.802+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : dataSourceProperties............{password=<masked>}
+2026-08-31T14:57:00.802+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : driverClassName................."org.postgresql.Driver"
+2026-08-31T14:57:00.802+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName......none
+2026-08-31T14:57:00.802+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : healthCheckProperties...........{}
+2026-08-31T14:57:00.802+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry.............none
+2026-08-31T14:57:00.802+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : idleTimeout.....................600000
+2026-08-31T14:57:00.803+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout.......1
+2026-08-31T14:57:00.808+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries..........false
+2026-08-31T14:57:00.808+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : jdbcUrl.........................jdbc:postgresql://127.0.0.1:5433/travel_planner
+2026-08-31T14:57:00.809+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : keepaliveTime...................0
+2026-08-31T14:57:00.809+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold..........0
+2026-08-31T14:57:00.809+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : maxLifetime.....................1800000
+2026-08-31T14:57:00.809+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : maximumPoolSize.................10
+2026-08-31T14:57:00.809+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : metricRegistry..................none
+2026-08-31T14:57:00.809+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory...........com.zaxxer.hikari.metrics.micrometer.MicrometerMetricsTrackerFactory@19134cc9
+2026-08-31T14:57:00.809+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : minimumIdle.....................10
+2026-08-31T14:57:00.810+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : password........................<masked>
+2026-08-31T14:57:00.810+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : poolName........................"HikariPool-1"
+2026-08-31T14:57:00.810+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : readOnly........................false
+2026-08-31T14:57:00.810+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : registerMbeans..................false
+2026-08-31T14:57:00.810+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : scheduledExecutor...............none
+2026-08-31T14:57:00.810+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : schema..........................none
+2026-08-31T14:57:00.810+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : threadFactory...................internal
+2026-08-31T14:57:00.810+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : transactionIsolation............default
+2026-08-31T14:57:00.811+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : username........................"travel_user"
+2026-08-31T14:57:00.811+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariConfig           : validationTimeout...............5000
+2026-08-31T14:57:00.811+07:00  INFO 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-08-31T14:57:01.008+07:00  INFO 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4147389d
+2026-08-31T14:57:01.020+07:00  INFO 8112 --- [travel-planner] [nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-08-31T14:57:01.054+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+2026-08-31T14:57:01.128+07:00 DEBUG 8112 --- [travel-planner] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2026-08-31T14:57:01.150+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+2026-08-31T14:57:01.150+07:00 DEBUG 8112 --- [travel-planner] [nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+2026-08-31T14:57:01.166+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4167ece6
+2026-08-31T14:57:01.205+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=2, active=0, idle=2, waiting=0)
+2026-08-31T14:57:01.246+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4fa01aba
+2026-08-31T14:57:01.282+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=3, active=0, idle=3, waiting=0)
+2026-08-31T14:57:01.325+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4b9f8796
+2026-08-31T14:57:01.360+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=4, active=0, idle=4, waiting=0)
+2026-08-31T14:57:01.405+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@e9d1081
+2026-08-31T14:57:01.436+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=5, active=0, idle=5, waiting=0)
+2026-08-31T14:57:01.474+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@70e3dd68
+2026-08-31T14:57:01.513+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=6, active=0, idle=6, waiting=0)
+2026-08-31T14:57:01.548+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3f597c04
+2026-08-31T14:57:01.590+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=7, active=0, idle=7, waiting=0)
+2026-08-31T14:57:01.626+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@8cdef4e
+2026-08-31T14:57:01.667+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=8, active=0, idle=8, waiting=0)
+2026-08-31T14:57:01.700+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6eb2efce
+2026-08-31T14:57:01.744+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=9, active=0, idle=9, waiting=0)
+2026-08-31T14:57:01.778+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5477ed
+2026-08-31T14:57:01.821+07:00 DEBUG 8112 --- [travel-planner] [onnection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
