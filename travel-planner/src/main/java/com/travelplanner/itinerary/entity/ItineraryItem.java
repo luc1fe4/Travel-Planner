@@ -48,5 +48,6 @@ public class ItineraryItem {
     public Double getLat() { return lat; }
     public Double getLng() { return lng; }
     public Integer getSequenceOrder() { return sequenceOrder; }
+    public void setSequenceOrder(Integer sequenceOrder) { this.sequenceOrder = sequenceOrder; }
     public LocalTime getStartTime() { return startTime; }
 }

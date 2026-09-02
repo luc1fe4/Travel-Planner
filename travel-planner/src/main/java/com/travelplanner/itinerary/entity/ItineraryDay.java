@@ -32,4 +32,5 @@ public class ItineraryDay {
     public Long getTripId() { return tripId; }
     public LocalDate getDate() { return date; }
     public List<ItineraryItem> getItems() { return items; }
+    public void setItems(List<ItineraryItem> items) { this.items = items; }
 }

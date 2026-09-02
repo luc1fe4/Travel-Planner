@@ -3,6 +3,7 @@ package com.travelplanner.itinerary.controller;
 import com.travelplanner.itinerary.dto.DayCreateRequest;
 import com.travelplanner.itinerary.dto.ItemCreateRequest;
 import com.travelplanner.itinerary.dto.ItineraryResponse;
+import com.travelplanner.itinerary.dto.ReorderRequest;
 import com.travelplanner.itinerary.service.ItineraryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,15 @@ public class ItineraryController {
     @PostMapping("/itineraries/days/{dayId}/items")
     public ResponseEntity<ItineraryResponse> addItem(@PathVariable Long dayId, @RequestBody ItemCreateRequest request, Authentication auth) {
         return ResponseEntity.ok(itineraryService.addItemToDay(dayId, request, auth.getName()));
+    }
+
+    @PatchMapping("/itineraries/days/{dayId}/reorder")
+    public ResponseEntity<ItineraryResponse> reorderItems(
+            @PathVariable Long dayId, 
+            @RequestBody ReorderRequest request, 
+            Authentication auth) {
+        
+        return ResponseEntity.ok(itineraryService.reorderItems(dayId, request, auth.getName()));
     }
 
     @GetMapping("/trips/{tripId}/itinerary")

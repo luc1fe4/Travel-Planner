@@ -4,6 +4,7 @@ import com.travelplanner.auth.service.UserQueryService;
 import com.travelplanner.itinerary.dto.DayCreateRequest;
 import com.travelplanner.itinerary.dto.ItemCreateRequest;
 import com.travelplanner.itinerary.dto.ItineraryResponse;
+import com.travelplanner.itinerary.dto.ReorderRequest;
 import com.travelplanner.itinerary.entity.ItineraryDay;
 import com.travelplanner.itinerary.entity.ItineraryItem;
 import com.travelplanner.itinerary.repository.ItineraryDayRepository;
@@ -12,6 +13,7 @@ import com.travelplanner.trip.service.TripQueryService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -50,6 +52,37 @@ public class ItineraryService {
         ItineraryItem item = new ItineraryItem(day, request.title(), request.locationName(), request.lat(), request.lng(), request.sequenceOrder(), request.startTime());
         itemRepository.save(item);
         
+        return mapToResponse(day);
+    }
+
+    @Transactional
+    public ItineraryResponse reorderItems(Long dayId, ReorderRequest request, String email) {
+        ItineraryDay day = dayRepository.findById(dayId)
+                .orElseThrow(() -> new IllegalArgumentException("Day not found"));
+        
+        validateTripAccess(day.getTripId(), email);
+
+        // Fetch items and lock them in the database for this transaction
+        List<ItineraryItem> lockedItems = itemRepository.findByDayIdWithPessimisticWriteLock(dayId);
+
+        // Apply the new sequence indexes in memory
+        for (ReorderRequest.ItemOrder order : request.items()) {
+            lockedItems.stream()
+                    .filter(item -> item.getId().equals(order.itemId()))
+                    .findFirst()
+                    .ifPresent(item -> item.setSequenceOrder(order.newIndex()));
+        }
+
+        // Save the batch update
+        itemRepository.saveAll(lockedItems);
+        itemRepository.flush();
+
+        // Resort the locked items in memory to guarantee the response matches the new state
+        lockedItems.sort(java.util.Comparator.comparing(ItineraryItem::getSequenceOrder)
+                .thenComparing(ItineraryItem::getStartTime, java.util.Comparator.nullsLast(java.util.Comparator.naturalOrder())));
+        
+        day.setItems(lockedItems);
+
         return mapToResponse(day);
     }
 
