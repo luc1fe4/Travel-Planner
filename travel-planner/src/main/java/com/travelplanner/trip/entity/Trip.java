@@ -28,6 +28,9 @@ public class Trip {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripMember> members = new ArrayList<>();
 
+    @Column(name = "invite_code", unique = true)
+    private String inviteCode;
+
     public Trip() {}
 
     public Trip(String name, LocalDate startDate, LocalDate endDate, Long ownerId) {
@@ -50,4 +53,6 @@ public class Trip {
     public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
     public List<TripMember> getMembers() { return members; }
     public void setMembers(List<TripMember> members) { this.members = members; }
+    public String getInviteCode() { return inviteCode; }
+    public void setInviteCode(String inviteCode) { this.inviteCode = inviteCode; }
 }

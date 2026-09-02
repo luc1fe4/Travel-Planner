@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TripMemberRepository extends JpaRepository<TripMember, Long> {
-  List<TripMember> findByUserId(Long userId);
-
-  List<TripMember> findByTripId(Long tripId);
+    List<TripMember> findByUserId(Long userId);
+    List<TripMember> findByTripId(Long tripId);
 }
