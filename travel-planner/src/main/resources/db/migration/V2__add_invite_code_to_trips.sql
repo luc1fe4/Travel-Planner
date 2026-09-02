@@ -1,0 +1,1 @@
+ALTER TABLE trips ADD COLUMN invite_code VARCHAR(50) UNIQUE;
