@@ -45,4 +45,18 @@ public class ModularArchitectureTest {
             )
             .because("Module 'itinerary' must communicate via services, not repositories/entities of other modules")
             .allowEmptyShould(true);
+
+    @ArchTest
+    static final ArchRule packingModuleEncapsulation =
+        noClasses().that().resideInAPackage("com.travelplanner.packing..")
+            .should().dependOnClassesThat().resideInAnyPackage(
+                "com.travelplanner.trip.repository..",
+                "com.travelplanner.trip.entity..",
+                "com.travelplanner.finance.repository..",
+                "com.travelplanner.finance.entity..",
+                "com.travelplanner.auth.repository..",
+                "com.travelplanner.auth.entity.."
+            )
+            .because("Module 'packing' must communicate via services, not repositories/entities of other modules")
+            .allowEmptyShould(true);
 }
