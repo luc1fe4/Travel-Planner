@@ -1,0 +1,7 @@
+CREATE TABLE packing_items (
+    id BIGSERIAL PRIMARY KEY,
+    trip_id BIGINT NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
+    label VARCHAR(255) NOT NULL,
+    is_checked BOOLEAN DEFAULT FALSE NOT NULL,
+    assigned_user_id BIGINT REFERENCES users(id) ON DELETE SET NULL
+);
