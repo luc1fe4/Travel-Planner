@@ -1,0 +1,15 @@
+CREATE TABLE expense_entries (
+    id BIGSERIAL PRIMARY KEY,
+    trip_id BIGINT NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
+    description VARCHAR(255) NOT NULL,
+    amount NUMERIC(12, 2) NOT NULL,
+    paid_by_user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE expense_splits (
+    id BIGSERIAL PRIMARY KEY,
+    expense_entry_id BIGINT NOT NULL REFERENCES expense_entries(id) ON DELETE CASCADE,
+    owed_by_user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
+    amount NUMERIC(12, 2) NOT NULL
+);
