@@ -4,6 +4,7 @@ import com.travelplanner.auth.service.UserQueryService;
 import com.travelplanner.expense.dto.ExpenseCreateRequest;
 import com.travelplanner.expense.dto.ExpenseResponse;
 import com.travelplanner.expense.dto.ExpenseSplitResponse;
+import com.travelplanner.expense.dto.TripBalanceResponse;
 import com.travelplanner.expense.entity.ExpenseEntry;
 import com.travelplanner.expense.entity.ExpenseSplit;
 import com.travelplanner.expense.repository.ExpenseEntryRepository;
@@ -14,7 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class ExpenseService {
@@ -75,6 +80,77 @@ public class ExpenseService {
         return expenseRepository.findByTripIdOrderByCreatedAtDesc(tripId).stream()
                 .map(this::mapToResponse)
                 .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public TripBalanceResponse computeBalances(Long tripId, String email) {
+        validateTripAccess(tripId, email);
+
+        List<ExpenseEntry> entries = expenseRepository.findByTripIdWithSplits(tripId);
+
+        // Track net balances: userId -> net amount (positive = owed money, negative = owes money)
+        Map<Long, BigDecimal> netBalances = new HashMap<>();
+
+        // Track bilateral raw debts: "debtor:creditor" -> accumulated debt
+        Map<String, BigDecimal> bilateralDebts = new HashMap<>();
+        Set<Long> userIds = new HashSet<>();
+
+        for (ExpenseEntry entry : entries) {
+            Long payerId = entry.getPaidByUserId();
+            userIds.add(payerId);
+
+            for (ExpenseSplit split : entry.getSplits()) {
+                Long debtorId = split.getOwedByUserId();
+                BigDecimal splitAmount = split.getAmount();
+                userIds.add(debtorId);
+
+                // Update net balances: payer gets credited, debtor gets debited
+                netBalances.put(payerId, netBalances.getOrDefault(payerId, BigDecimal.ZERO).add(splitAmount));
+                netBalances.put(debtorId, netBalances.getOrDefault(debtorId, BigDecimal.ZERO).subtract(splitAmount));
+
+                // Accumulate direct pairwise debt if debtor is not payer
+                if (!debtorId.equals(payerId)) {
+                    String debtKey = debtorId + ":" + payerId;
+                    bilateralDebts.put(debtKey, bilateralDebts.getOrDefault(debtKey, BigDecimal.ZERO).add(splitAmount));
+                }
+            }
+        }
+
+        // Build net balance list
+        List<TripBalanceResponse.UserBalance> userBalanceList = userIds.stream()
+                .map(uid -> new TripBalanceResponse.UserBalance(
+                        uid,
+                        netBalances.getOrDefault(uid, BigDecimal.ZERO).setScale(2, RoundingMode.HALF_UP)
+                ))
+                .toList();
+
+        // Calculate raw pairwise netting between all pairs
+        List<TripBalanceResponse.PairwiseSettlement> settlements = new ArrayList<>();
+        List<Long> memberList = new ArrayList<>(userIds);
+
+        for (int i = 0; i < memberList.size(); i++) {
+            for (int j = i + 1; j < memberList.size(); j++) {
+                Long u1 = memberList.get(i);
+                Long u2 = memberList.get(j);
+
+                BigDecimal u1OwesU2 = bilateralDebts.getOrDefault(u1 + ":" + u2, BigDecimal.ZERO);
+                BigDecimal u2OwesU1 = bilateralDebts.getOrDefault(u2 + ":" + u1, BigDecimal.ZERO);
+
+                BigDecimal netDebt = u1OwesU2.subtract(u2OwesU1);
+
+                if (netDebt.compareTo(BigDecimal.ZERO) > 0) {
+                    settlements.add(new TripBalanceResponse.PairwiseSettlement(
+                            u1, u2, netDebt.setScale(2, RoundingMode.HALF_UP)
+                    ));
+                } else if (netDebt.compareTo(BigDecimal.ZERO) < 0) {
+                    settlements.add(new TripBalanceResponse.PairwiseSettlement(
+                            u2, u1, netDebt.negate().setScale(2, RoundingMode.HALF_UP)
+                    ));
+                }
+            }
+        }
+
+        return new TripBalanceResponse(userBalanceList, settlements);
     }
 
     private ExpenseResponse mapToResponse(ExpenseEntry entry) {
