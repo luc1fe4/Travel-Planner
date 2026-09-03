@@ -6,7 +6,9 @@ import com.travelplanner.auth.service.UserQueryService;
 import com.travelplanner.expense.dto.ExpenseCreateRequest;
 import com.travelplanner.expense.dto.ExpenseResponse;
 import com.travelplanner.expense.dto.ExpenseSplitResponse;
+import com.travelplanner.expense.dto.TripBalanceResponse;
 import com.travelplanner.expense.entity.ExpenseEntry;
+import com.travelplanner.expense.entity.ExpenseSplit;
 import com.travelplanner.expense.repository.ExpenseEntryRepository;
 import com.travelplanner.trip.entity.Trip;
 import com.travelplanner.trip.entity.TripMember;
@@ -178,5 +180,42 @@ class ExpenseServiceTest {
         assertThat(results).hasSize(2);
         assertThat(results.get(0).description()).isEqualTo("Museum");
         assertThat(results.get(1).description()).isEqualTo("Lunch");
+    }
+
+    @Test
+    void computeBalances_Success() {
+        setupMemberUser();
+
+        // User 1 pays $60 for User 1 and User 2 ($30 each)
+        ExpenseEntry entry = new ExpenseEntry(tripId, "Dinner", new BigDecimal("60.00"), 1L);
+        ExpenseSplit split1 = new ExpenseSplit(entry, 1L, new BigDecimal("30.00"));
+        ExpenseSplit split2 = new ExpenseSplit(entry, 2L, new BigDecimal("30.00"));
+        entry.setSplits(List.of(split1, split2));
+
+        when(expenseRepository.findByTripIdWithSplits(tripId)).thenReturn(List.of(entry));
+
+        TripBalanceResponse balance = expenseService.computeBalances(tripId, email);
+
+        assertThat(balance).isNotNull();
+        assertThat(balance.netBalances()).hasSize(2);
+
+        // User 1 net: +$30.00 (paid $60, owes $30)
+        // User 2 net: -$30.00 (paid $0, owes $30)
+        TripBalanceResponse.UserBalance ub1 = balance.netBalances().stream()
+                .filter(b -> b.userId().equals(1L))
+                .findFirst().orElseThrow();
+        assertThat(ub1.netAmount()).isEqualTo(new BigDecimal("30.00"));
+
+        TripBalanceResponse.UserBalance ub2 = balance.netBalances().stream()
+                .filter(b -> b.userId().equals(2L))
+                .findFirst().orElseThrow();
+        assertThat(ub2.netAmount()).isEqualTo(new BigDecimal("-30.00"));
+
+        // Pairwise settlement: User 2 owes User 1 $30.00
+        assertThat(balance.settlements()).hasSize(1);
+        TripBalanceResponse.PairwiseSettlement settlement = balance.settlements().get(0);
+        assertThat(settlement.fromUserId()).isEqualTo(2L);
+        assertThat(settlement.toUserId()).isEqualTo(1L);
+        assertThat(settlement.amount()).isEqualTo(new BigDecimal("30.00"));
     }
 }
