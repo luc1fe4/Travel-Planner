@@ -31,8 +31,14 @@ public class SecurityConfig {
             // Enforce stateless sessions for JWT auth
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Allow public access to auth endpoints and actuator health check
-                .requestMatchers("/api/v1/auth/**", "/actuator/health").permitAll()
+                // Allow public access to auth endpoints, actuator health check, and openapi docs
+                .requestMatchers(
+                    "/api/v1/auth/**",
+                    "/actuator/health",
+                    "/v3/api-docs/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html"
+                ).permitAll()
                 // Require authentication for all other requests
                 .anyRequest().authenticated()
             )
